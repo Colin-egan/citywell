@@ -148,13 +148,13 @@
       .give-form-box { padding: 28px 20px; }
     }
 
-    /* Well water wave scroll */
+    /* Well water wave scroll — 21px period so 2 symmetric cycles show */
     .wm-wave-move {
-      animation: wm-wave-scroll 3.2s linear infinite;
+      animation: wm-wave-scroll 2.8s linear infinite;
     }
     @keyframes wm-wave-scroll {
       from { transform: translateX(0); }
-      to   { transform: translateX(-42px); }
+      to   { transform: translateX(-21px); }
     }
   </style>
 </head>
@@ -499,25 +499,36 @@
                 <clipPath id="wm-clip">
                   <rect x="24" y="28" width="42" height="120"/>
                 </clipPath>
-                <!-- Water fill gradient (bright surface → deep blue) -->
-                <linearGradient id="wm-wg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <!-- Water gradient fixed to interior coords: y=28 (top) → y=148 (bottom) -->
+                <linearGradient id="wm-wg" x1="0" y1="28" x2="0" y2="148" gradientUnits="userSpaceOnUse">
                   <stop offset="0%"   stop-color="#60e4ff"/>
-                  <stop offset="22%"  stop-color="#00adef"/>
+                  <stop offset="25%"  stop-color="#00adef"/>
                   <stop offset="70%"  stop-color="#0068b8"/>
                   <stop offset="100%" stop-color="#003c7a"/>
                 </linearGradient>
+                <!-- Water level clip — JS updates this rect to reveal water from the bottom up -->
+                <clipPath id="wm-wl-clip">
+                  <rect id="wm-wcr" x="24" y="148" width="42" height="0"/>
+                </clipPath>
               </defs>
 
               <!-- Interior dark background -->
               <rect x="24" y="28" width="42" height="120" fill="url(#wm-int)"/>
 
-              <!-- Water column — JS animates this group upward as level rises.
-                   Wave path fills from crest (~y=3) down to y=130 (local coords).
-                   Interior clip (wm-clip) cuts everything outside y=28..148 in SVG space. -->
+              <!-- Static water fill — clipped to interior AND water level rect (wm-wcr) -->
+              <g clip-path="url(#wm-clip)">
+                <g clip-path="url(#wm-wl-clip)">
+                  <rect x="24" y="28" width="42" height="120" fill="url(#wm-wg)"/>
+                  <rect x="24" y="28" width="42" height="120" fill="rgba(255,255,255,0.05)"/>
+                </g>
+              </g>
+
+              <!-- Wave at water surface — period=21px, 2 symmetric cycles visible.
+                   JS moves this group to the water top (same Y as the clip rect). -->
               <g id="wm-wave-g" clip-path="url(#wm-clip)" transform="translate(24, 148)">
                 <g class="wm-wave-move">
-                  <path fill="url(#wm-wg)" d="M-42 3 Q-31.5 -3 -21 3 Q-10.5 9 0 3 Q10.5 -3 21 3 Q31.5 9 42 3 Q52.5 -3 63 3 Q73.5 9 84 3 L84 130 L-42 130 Z"/>
-                  <path fill="rgba(185,248,255,0.22)" d="M-42 1 Q-31.5 8 -21 1 Q-10.5 -6 0 1 Q10.5 8 21 1 Q31.5 -6 42 1 Q52.5 8 63 1 Q73.5 -6 84 1 L84 9 L-42 9 Z"/>
+                  <path fill="url(#wm-wg)" d="M-21 2 Q-15.75 -0.5 -10.5 2 Q-5.25 4.5 0 2 Q5.25 -0.5 10.5 2 Q15.75 4.5 21 2 Q26.25 -0.5 31.5 2 Q36.75 4.5 42 2 Q47.25 -0.5 52.5 2 Q57.75 4.5 63 2 L63 130 L-21 130 Z"/>
+                  <path fill="rgba(185,248,255,0.22)" d="M-21 0 Q-15.75 3 -10.5 0 Q-5.25 -3 0 0 Q5.25 3 10.5 0 Q15.75 -3 21 0 Q26.25 3 31.5 0 Q36.75 -3 42 0 Q47.25 3 52.5 0 Q57.75 -3 63 0 L63 8 L-21 8 Z"/>
                 </g>
               </g>
 
@@ -689,14 +700,14 @@
 
     const WATER_TIERS = [
       { max: 0,        pct: 0  },
-      { max: 24,       pct: 5  },
-      { max: 49,       pct: 16 },
-      { max: 99,       pct: 32 },
-      { max: 249,      pct: 48 },
-      { max: 499,      pct: 63 },
-      { max: 999,      pct: 75 },
-      { max: 2499,     pct: 86 },
-      { max: Infinity, pct: 93 },
+      { max: 24,       pct: 22 },
+      { max: 49,       pct: 38 },
+      { max: 99,       pct: 54 },
+      { max: 249,      pct: 68 },
+      { max: 499,      pct: 80 },
+      { max: 999,      pct: 88 },
+      { max: 2499,     pct: 94 },
+      { max: Infinity, pct: 98 },
     ];
 
     function amountToWaterPct(amount) {
@@ -710,9 +721,12 @@
     let wellRafId      = null;
 
     function applyWaterLevel(pct) {
-      const waterTop = WELL_INT_BOTTOM - (WELL_INT_H * pct / 100);
+      const waterH   = WELL_INT_H * pct / 100;
+      const waterTop = WELL_INT_BOTTOM - waterH;
+      const wcr   = document.getElementById('wm-wcr');
       const waveG = document.getElementById('wm-wave-g');
-      if (waveG) waveG.setAttribute('transform', `translate(24, ${waterTop})`);
+      if (wcr)   { wcr.setAttribute('y', waterTop); wcr.setAttribute('height', waterH); }
+      if (waveG) { waveG.setAttribute('transform', `translate(24, ${waterTop})`); }
     }
 
     function wellTick() {
