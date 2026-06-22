@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Give | CityWell</title>
+  <link rel="stylesheet" href="//use.typekit.net/yhk2bsm.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .give-amount-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .give-amount-btn {
+      padding: 14px;
+      border: 1.5px solid #e0ddd8;
+      background: white;
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--dark);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: border-color 0.22s, background 0.22s, color 0.22s;
+    }
+
+    .give-amount-btn:hover,
+    .give-amount-btn.selected {
+      border-color: var(--accent);
+      background: rgba(0,173,239,0.06);
+      color: var(--accent);
+    }
+
+    .give-custom-input {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .give-custom-input span {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gray-lt);
+    }
+
+    .give-custom-input input {
+      width: 100%;
+      padding: 15px 18px 15px 32px;
+      border: 1.5px solid #e0ddd8;
+      background: white;
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      outline: none;
+      border-radius: 2px;
+      transition: border-color 0.22s, box-shadow 0.22s;
+    }
+
+    .give-custom-input input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0,173,239,0.10);
+    }
+
+    .give-freq {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .give-freq-btn {
+      flex: 1;
+      padding: 11px;
+      border: 1.5px solid #e0ddd8;
+      background: white;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--gray);
+      border-radius: 2px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: border-color 0.22s, background 0.22s, color 0.22s;
+    }
+
+    .give-freq-btn:hover,
+    .give-freq-btn.selected {
+      border-color: var(--dark);
+      background: var(--dark);
+      color: white;
+    }
+
+    .give-form-box {
+      background: var(--cream);
+      border-radius: 4px;
+      padding: 40px;
+      max-width: 480px;
+    }
+
+    @media (max-width: 640px) {
+      .give-amount-grid { grid-template-columns: repeat(2, 1fr); }
+      .give-form-box { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="announce-bar">
+    Join us Sundays at 10:30am &nbsp;·&nbsp; <a href="new-to-citywell.html">New to CityWell?</a>
+  </div>
+
+  <header id="main-header" class="dark-nav">
+    <div class="header-inner">
+      <a href="CityWell.html" class="logo"><img src="assets/city-well-logo-white.png" alt="CityWell"></a>
+      <nav>
+        <ul id="top-menu">
+          <li class="menu-item menu-item-has-children">
+            <a href="join-us.html">Join Us</a>
+            <ul class="sub-menu">
+              <li><a href="new-to-citywell.html">New to CityWell?</a></li>
+              <li><a href="wells.html">Wells (Small Groups)</a></li>
+              <li><a href="ministries.html">Ministries</a></li>
+              <li><a href="citybabies.html">Children's Ministry Ages 0–3</a></li>
+              <li><a href="citykids.html">Children's Ministry Ages 3–10</a></li>
+            </ul>
+          </li>
+          <li class="menu-item menu-item-has-children">
+            <a href="who-we-are.html">Who We Are</a>
+            <ul class="sub-menu">
+              <li><a href="staff.html">Staff</a></li>
+              <li><a href="what-we-believe.html">What We Believe</a></li>
+              <li><a href="the-citywell-family-covenant.html">The CityWell Family Covenant</a></li>
+              <li><a href="statement-of-inclusion.html">Statement of Inclusion</a></li>
+              <li><a href="lgbtq-inclusion.html">LGBTQ+ Inclusion</a></li>
+            </ul>
+          </li>
+          <li class="menu-item"><a href="sermons.html">Sermons</a></li>
+          <li class="menu-item"><a href="contact.html">Contact</a></li>
+          <li class="menu-item give-btn"><a href="give.html" class="active">Give</a></li>
+        </ul>
+        <button class="mobile-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div id="mobile-menu">
+    <div class="mobile-menu-header">
+      <img src="assets/city-well-logo-white.png" alt="CityWell">
+      <button class="mobile-close">&times;</button>
+    </div>
+    <nav class="mobile-nav">
+      <ul>
+        <li><a href="join-us.html">Join Us</a>
+          <ul class="sub-menu">
+            <li><a href="new-to-citywell.html">New to CityWell?</a></li>
+            <li><a href="wells.html">Wells (Small Groups)</a></li>
+            <li><a href="ministries.html">Ministries</a></li>
+            <li><a href="citybabies.html">Children's Ministry Ages 0–3</a></li>
+            <li><a href="citykids.html">Children's Ministry Ages 3–10</a></li>
+          </ul>
+        </li>
+        <li><a href="who-we-are.html">Who We Are</a>
+          <ul class="sub-menu">
+            <li><a href="staff.html">Staff</a></li>
+            <li><a href="what-we-believe.html">What We Believe</a></li>
+            <li><a href="the-citywell-family-covenant.html">The CityWell Family Covenant</a></li>
+            <li><a href="statement-of-inclusion.html">Statement of Inclusion</a></li>
+            <li><a href="lgbtq-inclusion.html">LGBTQ+ Inclusion</a></li>
+          </ul>
+        </li>
+        <li><a href="sermons.html">Sermons</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="give.html" class="mobile-give">Give</a>
+  </div>
+
+  <section class="page-banner">
+    <div class="banner-inner">
+      <div class="banner-eyebrow">Generosity</div>
+      <h1>Give</h1>
+      <p class="banner-sub">Your generosity makes community possible.</p>
+    </div>
+  </section>
+
+  <section class="section-pad" style="background:var(--white);">
+    <div class="container">
+      <div class="split" style="align-items:start;">
+        <div data-reveal>
+          <div class="section-eyebrow">Why We Give</div>
+          <h2 class="section-title">Life is most <em>beautiful when shared</em></h2>
+          <div class="divider-line"></div>
+          <div class="section-body">
+            <p>Generosity is one of the central practices of the covenant way. When we give, we are enacting what we believe: that we don't live for ourselves alone, that everything we have is held on loan, and that there is always enough to share.</p>
+            <p>Your giving to CityWell funds Sunday worship, our Wells groups, children's ministry, pastoral care, community outreach, and our ongoing work in Chapel Hill. Every dollar goes toward building a community of belonging and life in this city.</p>
+            <p>We never pressure anyone to give — especially guests. If you're visiting, please don't feel any expectation. If you feel called to contribute, we receive every gift with deep gratitude.</p>
+          </div>
+
+          <div class="give-options" style="margin-top:48px;">
+            <div class="give-card">
+              <div class="give-card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="var(--accent)" stroke-width="1.5"/><path d="M2 10h20" stroke="var(--accent)" stroke-width="1.5"/></svg>
+              </div>
+              <h3>Online</h3>
+              <p>Give securely online via card or bank transfer — one-time or recurring.</p>
+              <a href="#give-form" class="btn-accent" style="font-size:11px;padding:10px 24px;">Give Online</a>
+            </div>
+            <div class="give-card">
+              <div class="give-card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="var(--accent)" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 17l10 5 10-5" stroke="var(--accent)" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 12l10 5 10-5" stroke="var(--accent)" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              </div>
+              <h3>In Person</h3>
+              <p>A giving bowl is passed during our Sunday service. Cash or check welcome.</p>
+              <a href="join-us.html" class="btn-outline" style="font-size:11px;padding:10px 24px;">Plan a Visit</a>
+            </div>
+            <div class="give-card">
+              <div class="give-card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" stroke="var(--accent)" stroke-width="1.5"/><path d="M2 9h20" stroke="var(--accent)" stroke-width="1.5"/></svg>
+              </div>
+              <h3>By Check</h3>
+              <p>Make checks payable to "CityWell Church" and mail or bring to the church.</p>
+              <a href="contact.html" class="btn-outline" style="font-size:11px;padding:10px 24px;">Get Address</a>
+            </div>
+          </div>
+        </div>
+
+        <div id="give-form" class="give-form-box" data-reveal data-reveal-delay="1">
+          <h3 style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--dark);margin-bottom:24px;">Give online</h3>
+
+          <div class="give-freq">
+            <button class="give-freq-btn selected">One-Time</button>
+            <button class="give-freq-btn">Monthly</button>
+          </div>
+
+          <div class="give-amount-grid">
+            <button class="give-amount-btn">$25</button>
+            <button class="give-amount-btn selected">$50</button>
+            <button class="give-amount-btn">$100</button>
+            <button class="give-amount-btn">$250</button>
+            <button class="give-amount-btn">$500</button>
+            <button class="give-amount-btn">Other</button>
+          </div>
+
+          <div class="give-custom-input">
+            <span>$</span>
+            <input type="number" placeholder="50" min="1">
+          </div>
+
+          <form onsubmit="return false;" style="margin-top:8px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+              <input type="text" placeholder="First name" style="padding:12px 14px;border:1.5px solid #e0ddd8;font-family:var(--sans);font-size:14px;outline:none;border-radius:2px;transition:border-color 0.22s;" required>
+              <input type="text" placeholder="Last name" style="padding:12px 14px;border:1.5px solid #e0ddd8;font-family:var(--sans);font-size:14px;outline:none;border-radius:2px;transition:border-color 0.22s;" required>
+            </div>
+            <input type="email" placeholder="Email address" style="width:100%;padding:12px 14px;border:1.5px solid #e0ddd8;font-family:var(--sans);font-size:14px;outline:none;border-radius:2px;margin-bottom:14px;transition:border-color 0.22s;" required>
+            <button type="submit" class="btn-primary" style="width:100%;border:none;cursor:pointer;padding:15px;">Continue to Payment</button>
+          </form>
+          <p style="font-size:12px;color:var(--gray-lt);margin-top:16px;text-align:center;line-height:1.6;">Secure payment processing. CityWell is a registered 501(c)(3) nonprofit. Your gift is tax-deductible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="main-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="CityWell.html" class="footer-logo"><img src="assets/city-well-logo-white.png" alt="CityWell"></a>
+          <p class="footer-tagline">For all who thirst.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-nav-heading">Connect</div>
+          <ul>
+            <li><a href="join-us.html">Join Us</a></li>
+            <li><a href="wells.html">Wells (Small Groups)</a></li>
+            <li><a href="ministries.html">Ministries</a></li>
+            <li><a href="sermons.html">Sermons</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-nav-heading">About</div>
+          <ul>
+            <li><a href="who-we-are.html">Who We Are</a></li>
+            <li><a href="staff.html">Staff</a></li>
+            <li><a href="what-we-believe.html">What We Believe</a></li>
+            <li><a href="statement-of-inclusion.html">Statement of Inclusion</a></li>
+            <li><a href="give.html">Give</a></li>
+          </ul>
+        </div>
+      </div>
+      <div id="footer-bottom">
+        <span>&copy; 2025 CityWell Church &mdash; Chapel Hill, NC</span>
+        <span>Website by <a href="https://pathosethos.com" target="_blank" rel="noopener">Pathos Ethos</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+  <script>
+    // Amount button selection
+    document.querySelectorAll('.give-amount-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.give-amount-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        const input = document.querySelector('.give-custom-input input');
+        if (btn.textContent !== 'Other') {
+          input.value = btn.textContent.replace('$', '');
+        } else {
+          input.value = '';
+          input.focus();
+        }
+      });
+    });
+
+    // Frequency button selection
+    document.querySelectorAll('.give-freq-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.give-freq-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+    });
+  </script>
+</body>
+</html>

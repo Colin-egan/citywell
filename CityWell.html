@@ -939,47 +939,140 @@
       .header-inner { padding: 0 24px; }
       #ethos, #newsletter, #covenant { padding-left: 24px; padding-right: 24px; }
     }
+
+    /* ─── MOBILE MENU ────────────────────────────── */
+    #mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(16, 16, 26, 0.98);
+      z-index: 2000;
+      flex-direction: column;
+      padding: 28px 32px;
+      overflow-y: auto;
+    }
+
+    #mobile-menu.open { display: flex; }
+
+    .mobile-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .mobile-menu-header img { height: 28px; }
+
+    .mobile-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .mobile-close:hover { opacity: 1; }
+
+    .mobile-nav { flex: 1; }
+    .mobile-nav ul { list-style: none; }
+
+    .mobile-nav > ul > li {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mobile-nav > ul > li > a {
+      display: block;
+      padding: 16px 0;
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .mobile-nav .sub-menu {
+      display: block;
+      position: static;
+      background: none;
+      border-top: none;
+      box-shadow: none;
+      border-radius: 0;
+      min-width: auto;
+      padding-bottom: 10px;
+    }
+
+    .mobile-nav .sub-menu li a {
+      color: rgba(255,255,255,0.50);
+      font-size: 14px;
+      padding: 7px 0 7px 16px;
+      border-bottom: none;
+    }
+
+    .mobile-nav .sub-menu li a:hover {
+      color: var(--accent);
+      background: none;
+      padding-left: 22px;
+    }
+
+    .mobile-give {
+      margin-top: 32px;
+      display: block;
+      text-align: center;
+      padding: 14px;
+      background: var(--accent);
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.22s;
+    }
+
+    .mobile-give:hover { background: var(--accent-dark); }
   </style>
 </head>
 <body>
 
   <!-- ANNOUNCEMENT BAR -->
   <div id="announce-bar">
-    Join us Sundays at 10:30am &nbsp;·&nbsp; <a href="https://citywell.vercel.app/new-to-citywell/">New to CityWell?</a>
+    Join us Sundays at 10:30am &nbsp;·&nbsp; <a href="new-to-citywell.html">New to CityWell?</a>
   </div>
 
   <!-- HEADER -->
   <header id="main-header">
     <div class="header-inner">
-      <a href="/" class="logo">
+      <a href="CityWell.html" class="logo">
         <img src="assets/city-well-logo-white.png" alt="CityWell">
       </a>
 
       <nav>
         <ul id="top-menu">
           <li class="menu-item menu-item-has-children">
-            <a href="https://citywell.vercel.app/join-us/">Join Us</a>
+            <a href="join-us.html">Join Us</a>
             <ul class="sub-menu">
-              <li><a href="https://citywell.vercel.app/new-to-citywell/">New to CityWell?</a></li>
-              <li><a href="https://citywell.vercel.app/join-us/wells/">Wells (Small Groups)</a></li>
-              <li><a href="https://citywell.vercel.app/join-us/ministries/">Ministries</a></li>
-              <li><a href="https://citywell.vercel.app/join-us/citybabies/">Children's Ministry Ages 0–3</a></li>
-              <li><a href="https://citywell.vercel.app/join-us/citykids/">Children's Ministry Ages 3–10</a></li>
+              <li><a href="new-to-citywell.html">New to CityWell?</a></li>
+              <li><a href="wells.html">Wells (Small Groups)</a></li>
+              <li><a href="ministries.html">Ministries</a></li>
+              <li><a href="citybabies.html">Children's Ministry Ages 0–3</a></li>
+              <li><a href="citykids.html">Children's Ministry Ages 3–10</a></li>
             </ul>
           </li>
           <li class="menu-item menu-item-has-children">
-            <a href="https://citywell.vercel.app/who-we-are/">Who We Are</a>
+            <a href="who-we-are.html">Who We Are</a>
             <ul class="sub-menu">
-              <li><a href="https://citywell.vercel.app/who-we-are/staff/">Staff</a></li>
-              <li><a href="https://citywell.vercel.app/who-we-are/what-we-believe/">What We Believe</a></li>
-              <li><a href="https://citywell.vercel.app/who-we-are/the-citywell-family-covenant/">The CityWell Family Covenant</a></li>
-              <li><a href="https://citywell.vercel.app/who-we-are/statement-of-inclusion/">Statement of Inclusion</a></li>
-              <li><a href="https://citywell.vercel.app/lgbtq-inclusion/">LGBTQ+ Inclusion</a></li>
+              <li><a href="staff.html">Staff</a></li>
+              <li><a href="what-we-believe.html">What We Believe</a></li>
+              <li><a href="the-citywell-family-covenant.html">The CityWell Family Covenant</a></li>
+              <li><a href="statement-of-inclusion.html">Statement of Inclusion</a></li>
+              <li><a href="lgbtq-inclusion.html">LGBTQ+ Inclusion</a></li>
             </ul>
           </li>
-          <li class="menu-item"><a href="https://citywell.vercel.app/sermons/">Sermons</a></li>
-          <li class="menu-item"><a href="https://citywell.vercel.app/contact/">Contact</a></li>
-          <li class="menu-item give-btn"><a href="https://citywell.vercel.app/give/">Give</a></li>
+          <li class="menu-item"><a href="sermons.html">Sermons</a></li>
+          <li class="menu-item"><a href="contact.html">Contact</a></li>
+          <li class="menu-item give-btn"><a href="give.html">Give</a></li>
         </ul>
 
         <button class="mobile-toggle" aria-label="Open menu">
@@ -989,6 +1082,41 @@
     </div>
   </header>
 
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu">
+    <div class="mobile-menu-header">
+      <img src="assets/city-well-logo-white.png" alt="CityWell">
+      <button class="mobile-close" aria-label="Close menu">&times;</button>
+    </div>
+    <nav class="mobile-nav">
+      <ul>
+        <li>
+          <a href="join-us.html">Join Us</a>
+          <ul class="sub-menu">
+            <li><a href="new-to-citywell.html">New to CityWell?</a></li>
+            <li><a href="wells.html">Wells (Small Groups)</a></li>
+            <li><a href="ministries.html">Ministries</a></li>
+            <li><a href="citybabies.html">Children's Ministry Ages 0–3</a></li>
+            <li><a href="citykids.html">Children's Ministry Ages 3–10</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="who-we-are.html">Who We Are</a>
+          <ul class="sub-menu">
+            <li><a href="staff.html">Staff</a></li>
+            <li><a href="what-we-believe.html">What We Believe</a></li>
+            <li><a href="the-citywell-family-covenant.html">The CityWell Family Covenant</a></li>
+            <li><a href="statement-of-inclusion.html">Statement of Inclusion</a></li>
+            <li><a href="lgbtq-inclusion.html">LGBTQ+ Inclusion</a></li>
+          </ul>
+        </li>
+        <li><a href="sermons.html">Sermons</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="give.html" class="mobile-give">Give</a>
+  </div>
+
   <!-- HERO -->
   <section id="hero">
     <div class="hero-content">
@@ -997,8 +1125,8 @@
         <h1>for <em>all</em><br>who thirst</h1>
         <h2>Embrace your belonging</h2>
         <div class="hero-actions">
-          <a href="https://citywell.vercel.app/join-us/" class="btn-hero">Join us</a>
-          <a href="https://citywell.vercel.app/new-to-citywell/" class="hero-link">
+          <a href="join-us.html" class="btn-hero">Join us</a>
+          <a href="new-to-citywell.html" class="hero-link">
             New to CityWell
             <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 5H13M9 1L13 5L9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1026,7 +1154,7 @@
       <blockquote>
         … becoming a people who receive the ways of Jesus as our way of life, for the sake of His glory, and for the sake of the world.
       </blockquote>
-      <a href="https://citywell.vercel.app/who-we-are/" class="btn-outline">Our Faith</a>
+      <a href="who-we-are.html" class="btn-outline">Our Faith</a>
     </div>
   </section>
 
@@ -1083,7 +1211,7 @@
       </div>
 
       <div class="covenant-cta" data-reveal>
-        <a href="https://citywell.vercel.app/who-we-are/the-citywell-family-covenant/" class="btn-covenant">
+        <a href="the-citywell-family-covenant.html" class="btn-covenant">
           Learn more about our family covenant
         </a>
       </div>
@@ -1124,7 +1252,7 @@
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <a href="/" class="footer-logo">
+          <a href="CityWell.html" class="footer-logo">
             <img src="assets/city-well-logo-white.png" alt="CityWell">
           </a>
           <p class="footer-tagline">For all who thirst.</p>
@@ -1132,21 +1260,21 @@
         <div class="footer-nav">
           <div class="footer-nav-heading">Connect</div>
           <ul>
-            <li><a href="https://citywell.vercel.app/join-us/">Join Us</a></li>
-            <li><a href="https://citywell.vercel.app/join-us/wells/">Wells (Small Groups)</a></li>
-            <li><a href="https://citywell.vercel.app/join-us/ministries/">Ministries</a></li>
-            <li><a href="https://citywell.vercel.app/sermons/">Sermons</a></li>
-            <li><a href="https://citywell.vercel.app/contact/">Contact</a></li>
+            <li><a href="join-us.html">Join Us</a></li>
+            <li><a href="wells.html">Wells (Small Groups)</a></li>
+            <li><a href="ministries.html">Ministries</a></li>
+            <li><a href="sermons.html">Sermons</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
         <div class="footer-nav">
           <div class="footer-nav-heading">About</div>
           <ul>
-            <li><a href="https://citywell.vercel.app/who-we-are/">Who We Are</a></li>
-            <li><a href="https://citywell.vercel.app/who-we-are/staff/">Staff</a></li>
-            <li><a href="https://citywell.vercel.app/who-we-are/what-we-believe/">What We Believe</a></li>
-            <li><a href="https://citywell.vercel.app/who-we-are/statement-of-inclusion/">Statement of Inclusion</a></li>
-            <li><a href="https://citywell.vercel.app/give/">Give</a></li>
+            <li><a href="who-we-are.html">Who We Are</a></li>
+            <li><a href="staff.html">Staff</a></li>
+            <li><a href="what-we-believe.html">What We Believe</a></li>
+            <li><a href="statement-of-inclusion.html">Statement of Inclusion</a></li>
+            <li><a href="give.html">Give</a></li>
           </ul>
         </div>
       </div>
@@ -1161,7 +1289,8 @@
   <script>
     // ── Sticky nav ──────────────────────────────────
     const header = document.getElementById('main-header');
-    const announceH = document.getElementById('announce-bar').offsetHeight;
+    const announceBar = document.getElementById('announce-bar');
+    const announceH = announceBar.offsetHeight;
 
     function updateHeader() {
       header.classList.toggle('scrolled', window.scrollY > announceH + 20);
@@ -1171,6 +1300,17 @@
 
     document.getElementById('hero').style.paddingTop = announceH + 'px';
 
+    // ── Mobile menu ──────────────────────────────────
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileClose = document.querySelector('.mobile-close');
+
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+    }
+    if (mobileClose && mobileMenu) {
+      mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    }
 
     // ── Scroll reveal ────────────────────────────────
     const revealEls = document.querySelectorAll('[data-reveal]');
