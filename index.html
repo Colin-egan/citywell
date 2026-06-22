@@ -569,6 +569,33 @@
     }
 
 
+    /* ─── FACEBOOK FEED ──────────────────────────── */
+    #facebook-feed {
+      background: var(--white);
+      padding: 88px 32px;
+      text-align: center;
+    }
+
+    #facebook-feed h2 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    #facebook-feed p {
+      color: var(--gray);
+      font-size: 16px;
+      margin-bottom: 36px;
+    }
+
+    .fb-page-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+
     /* ─── FOOTER ─────────────────────────────────── */
     #main-footer {
       background: var(--dark);
@@ -802,6 +829,30 @@
         </form>
       </div>
 
+    </div>
+  </section>
+
+  <!-- FACEBOOK FEED -->
+  <section id="facebook-feed">
+    <div data-reveal>
+      <h2>Follow Along</h2>
+      <p>Stay connected with our community on Facebook</p>
+      <div class="fb-page-wrap">
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous"
+          src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
+        </script>
+        <div class="fb-page"
+          data-href="https://www.facebook.com/citywell2317/"
+          data-tabs="timeline"
+          data-width="500"
+          data-height="600"
+          data-small-header="true"
+          data-adapt-container-width="true"
+          data-hide-cover="false"
+          data-show-facepile="false">
+        </div>
+      </div>
     </div>
   </section>
 
