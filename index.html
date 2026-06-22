@@ -42,18 +42,6 @@
     img { display: block; max-width: 100%; }
 
 
-    /* ─── ANNOUNCEMENT BAR ──────────────────────── */
-    #announce-bar {
-      background: var(--accent);
-      color: white;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-align: center;
-      padding: 9px 20px;
-    }
-
-
     /* ─── HEADER / NAV ───────────────────────────── */
     #main-header {
       position: fixed;
@@ -676,11 +664,6 @@
 </head>
 <body>
 
-  <!-- ANNOUNCEMENT BAR -->
-  <div id="announce-bar">
-    Join us Sundays at 10:30am &nbsp;·&nbsp; <a href="new-to-citywell.html" style="color:white;text-decoration:underline;text-underline-offset:2px;">New to CityWell?</a>
-  </div>
-
   <!-- HEADER -->
   <header id="main-header">
     <div class="header-inner">
@@ -870,16 +853,11 @@
   <script>
     // ── Sticky nav (becomes opaque on scroll) ──────
     const header = document.getElementById('main-header');
-    const announceH = document.getElementById('announce-bar').offsetHeight;
-
     function updateHeader() {
-      header.classList.toggle('scrolled', window.scrollY > announceH + 20);
+      header.classList.toggle('scrolled', window.scrollY > 20);
     }
     window.addEventListener('scroll', updateHeader, { passive: true });
     updateHeader();
-
-    // Offset hero for announce bar height
-    document.getElementById('hero').style.paddingTop = announceH + 'px';
 
 
     // ── Scroll reveal ──────────────────────────────

@@ -178,6 +178,15 @@ img { display: block; max-width: 100%; }
 
 .menu-item-has-children:hover .sub-menu { display: block; }
 
+.sub-menu::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
+
 .sub-menu li a {
   display: block;
   padding: 11px 22px;
