@@ -10,6 +10,42 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* ─── WELL MINI (above Give online heading) ─────────── */
+    .well-mini {
+      text-align: center;
+      margin: 0 0 28px;
+    }
+    .well-mini svg {
+      display: block;
+      width: 68px;
+      height: auto;
+      margin: 0 auto 10px;
+    }
+    #wi-text {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-lt);
+      line-height: 1.55;
+      letter-spacing: 0.02em;
+      transition: opacity 0.25s;
+    }
+
+    /* Bubble rise animation */
+    .bbl { animation: bbl-rise 4s ease-in infinite; opacity: 0; }
+    .b1 { animation-delay: 0.4s;  animation-duration: 3.8s; }
+    .b2 { animation-delay: 1.7s;  animation-duration: 4.4s; }
+    .b3 { animation-delay: 0.1s;  animation-duration: 3.3s; }
+    .b4 { animation-delay: 2.6s;  animation-duration: 4.0s; }
+    .b5 { animation-delay: 1.0s;  animation-duration: 3.6s; }
+    .b6 { animation-delay: 3.2s;  animation-duration: 4.8s; }
+    @keyframes bbl-rise {
+      0%   { transform: translateY(0) translateX(0); opacity: 0; }
+      6%   { opacity: 0.75; }
+      80%  { opacity: 0.30; }
+      100% { transform: translateY(-140px) translateX(5px); opacity: 0; }
+    }
+
     .give-amount-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -111,6 +147,15 @@
       .give-amount-grid { grid-template-columns: repeat(2, 1fr); }
       .give-form-box { padding: 28px 20px; }
     }
+
+    /* Well water wave scroll */
+    .wm-wave-move {
+      animation: wm-wave-scroll 3.2s linear infinite;
+    }
+    @keyframes wm-wave-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-42px); }
+    }
   </style>
 </head>
 <body>
@@ -193,6 +238,186 @@
     </div>
   </section>
 
+  <!-- well visualizer is inline in the give form below -->
+
+  <section style="display:none">
+    <div>
+      <div class="well-eyebrow">Your Generosity at Work</div>
+      <h2 class="well-title">See what your gift <em>fills the well</em></h2>
+      <p class="well-sub">Choose an amount to see the impact your generosity makes possible.</p>
+
+      <div class="well-stage">
+        <svg id="the-well" viewBox="0 0 260 366" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <!-- Stone wall gradients -->
+            <linearGradient id="sg-l" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="#7a6a52"/>
+              <stop offset="25%"  stop-color="#a28868"/>
+              <stop offset="65%"  stop-color="#bca680"/>
+              <stop offset="100%" stop-color="#967a5a"/>
+            </linearGradient>
+            <linearGradient id="sg-r" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="#967a5a"/>
+              <stop offset="35%"  stop-color="#bca680"/>
+              <stop offset="75%"  stop-color="#a28868"/>
+              <stop offset="100%" stop-color="#7a6a52"/>
+            </linearGradient>
+            <!-- Stone cap / base gradients -->
+            <linearGradient id="sg-top" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="#d0bc98"/>
+              <stop offset="50%"  stop-color="#baa880"/>
+              <stop offset="100%" stop-color="#9e8866"/>
+            </linearGradient>
+            <linearGradient id="sg-base" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="#9e8866"/>
+              <stop offset="100%" stop-color="#7a6252"/>
+            </linearGradient>
+            <!-- Interior dark background (wet stone) -->
+            <linearGradient id="int-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="#162030"/>
+              <stop offset="100%" stop-color="#06101a"/>
+            </linearGradient>
+            <!-- Interior edge shadows (depth illusion) -->
+            <linearGradient id="int-sh-l" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="rgba(0,0,0,0.48)"/>
+              <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+            </linearGradient>
+            <linearGradient id="int-sh-r" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="rgba(0,0,0,0)"/>
+              <stop offset="100%" stop-color="rgba(0,0,0,0.48)"/>
+            </linearGradient>
+            <!-- Water column gradient (bright surface → deep bottom) -->
+            <linearGradient id="wg" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="#60e4ff"/>
+              <stop offset="18%"  stop-color="#00adef"/>
+              <stop offset="68%"  stop-color="#0068b8"/>
+              <stop offset="100%" stop-color="#003c7a"/>
+            </linearGradient>
+            <!-- Water surface shimmer (horizontal light band) -->
+            <linearGradient id="wsh" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="rgba(255,255,255,0)"/>
+              <stop offset="35%"  stop-color="rgba(255,255,255,0.20)"/>
+              <stop offset="55%"  stop-color="rgba(255,255,255,0.09)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+            </linearGradient>
+            <!-- Cap bottom shadow -->
+            <linearGradient id="cap-sh" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="rgba(0,0,0,0.30)"/>
+              <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+            </linearGradient>
+            <!-- Wall inner shadows (right of left wall, left of right wall) -->
+            <linearGradient id="wl-sh-l" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="rgba(0,0,0,0)"/>
+              <stop offset="100%" stop-color="rgba(0,0,0,0.28)"/>
+            </linearGradient>
+            <linearGradient id="wl-sh-r" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="rgba(0,0,0,0.28)"/>
+              <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+            </linearGradient>
+            <!-- Interior clip (the well opening: x60→200, y46→340) -->
+            <clipPath id="int-clip">
+              <rect x="60" y="46" width="140" height="294"/>
+            </clipPath>
+            <!-- Water-level clip (y and height updated by JS) -->
+            <clipPath id="wl-clip">
+              <rect id="wcr" x="60" y="340" width="140" height="0"/>
+            </clipPath>
+          </defs>
+
+          <!-- Interior dark background -->
+          <rect x="60" y="46" width="140" height="294" fill="url(#int-bg)"/>
+          <!-- Interior depth shadows (left and right edges) -->
+          <rect x="60" y="46" width="32" height="294" fill="url(#int-sh-l)" clip-path="url(#int-clip)"/>
+          <rect x="168" y="46" width="32" height="294" fill="url(#int-sh-r)" clip-path="url(#int-clip)"/>
+
+          <!-- Water fill — clipped by wl-clip (water level) AND int-clip (interior) -->
+          <g clip-path="url(#int-clip)">
+            <g clip-path="url(#wl-clip)">
+              <rect x="60" y="46" width="140" height="294" fill="url(#wg)"/>
+              <!-- Shimmer light band -->
+              <rect x="60" y="46" width="140" height="294" fill="url(#wsh)" opacity="0.75"/>
+              <!-- Rising bubbles (only visible where water exists, thanks to wl-clip) -->
+              <circle class="bbl b1" cx="91"  cy="296" r="2.8" fill="rgba(255,255,255,0.50)"/>
+              <circle class="bbl b2" cx="145" cy="279" r="1.9" fill="rgba(255,255,255,0.44)"/>
+              <circle class="bbl b3" cx="182" cy="310" r="2.3" fill="rgba(255,255,255,0.40)"/>
+              <circle class="bbl b4" cx="111" cy="322" r="1.5" fill="rgba(255,255,255,0.54)"/>
+              <circle class="bbl b5" cx="167" cy="292" r="2.0" fill="rgba(255,255,255,0.38)"/>
+              <circle class="bbl b6" cx="131" cy="307" r="2.5" fill="rgba(255,255,255,0.42)"/>
+            </g>
+          </g>
+
+          <!-- Animated wave at water surface (positioned by JS, clipped to interior) -->
+          <g id="wave-g" clip-path="url(#int-clip)" transform="translate(60,340)">
+            <g class="wave-move">
+              <!-- Primary wave: fills water body below crest -->
+              <path fill="url(#wg)" d="M-140 3 Q-105 -5 -70 3 Q-35 11 0 3 Q35 -5 70 3 Q105 11 140 3 Q175 -5 210 3 Q245 11 280 3 L280 310 L-140 310 Z"/>
+              <!-- Secondary shimmer layer (slightly out of phase) -->
+              <path fill="rgba(185,248,255,0.26)" d="M-140 1 Q-105 9 -70 1 Q-35 -7 0 1 Q35 9 70 1 Q105 -7 140 1 Q175 9 210 1 Q245 -7 280 1 L280 9 L-140 9 Z"/>
+            </g>
+          </g>
+
+          <!-- ── Stone left wall (drawn over interior so it looks solid) ── -->
+          <rect x="10" y="44" width="50" height="298" fill="url(#sg-l)"/>
+          <!-- Mortar horizontal lines -->
+          <line x1="10" y1="79"  x2="60" y2="79"  stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="10" y1="114" x2="60" y2="114" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="10" y1="149" x2="60" y2="149" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="10" y1="184" x2="60" y2="184" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="10" y1="219" x2="60" y2="219" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="10" y1="254" x2="60" y2="254" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="10" y1="289" x2="60" y2="289" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="10" y1="324" x2="60" y2="324" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <!-- Vertical stone breaks (alternating per course) -->
+          <line x1="32" y1="44"  x2="32" y2="79"  stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+          <line x1="32" y1="114" x2="32" y2="149" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+          <line x1="32" y1="184" x2="32" y2="219" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+          <line x1="32" y1="254" x2="32" y2="289" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+          <line x1="32" y1="324" x2="32" y2="342" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+          <!-- Inner edge shadow (adds wall depth) -->
+          <rect x="44" y="44" width="16" height="298" fill="url(#wl-sh-l)"/>
+
+          <!-- ── Stone right wall ── -->
+          <rect x="200" y="44" width="50" height="298" fill="url(#sg-r)"/>
+          <line x1="200" y1="79"  x2="250" y2="79"  stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="200" y1="114" x2="250" y2="114" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="200" y1="149" x2="250" y2="149" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="200" y1="184" x2="250" y2="184" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="200" y1="219" x2="250" y2="219" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="200" y1="254" x2="250" y2="254" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="200" y1="289" x2="250" y2="289" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="200" y1="324" x2="250" y2="324" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <line x1="228" y1="44"  x2="228" y2="79"  stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+          <line x1="228" y1="114" x2="228" y2="149" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+          <line x1="228" y1="184" x2="228" y2="219" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+          <line x1="228" y1="254" x2="228" y2="289" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+          <line x1="228" y1="324" x2="228" y2="342" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+          <rect x="200" y="44" width="16" height="298" fill="url(#wl-sh-r)"/>
+
+          <!-- ── Stone top cap (wider ledge) ── -->
+          <rect x="0" y="22" width="260" height="28" rx="4" fill="url(#sg-top)"/>
+          <!-- Cap top highlight -->
+          <rect x="0" y="22" width="260" height="5" rx="4" fill="rgba(255,255,255,0.14)"/>
+          <!-- Cap bottom shadow (creates overhang depth) -->
+          <rect x="0" y="44" width="260" height="14" fill="url(#cap-sh)"/>
+          <!-- Vertical mortar seams on cap -->
+          <line x1="65"  y1="22" x2="65"  y2="50" stroke="rgba(0,0,0,0.09)" stroke-width="0.5"/>
+          <line x1="130" y1="22" x2="130" y2="50" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+          <line x1="195" y1="22" x2="195" y2="50" stroke="rgba(0,0,0,0.09)" stroke-width="0.5"/>
+
+          <!-- ── Stone base ── -->
+          <rect x="0" y="338" width="260" height="20" rx="3" fill="url(#sg-base)"/>
+          <rect x="0" y="338" width="260" height="4"  rx="3" fill="rgba(255,255,255,0.07)"/>
+
+          <!-- Water % readout inside the well (fades in when level is high enough) -->
+          <text id="wl-pct" x="130" y="200" text-anchor="middle"
+                font-family="Open Sans, sans-serif" font-size="12" font-weight="700"
+                letter-spacing="0.08em" fill="rgba(255,255,255,0)" clip-path="url(#int-clip)">0%</text>
+        </svg>
+      </div>
+
+    </div>
+  </section>
+
   <section class="section-pad" style="background:var(--white);">
     <div class="container">
       <div class="split" style="align-items:start;">
@@ -235,6 +460,112 @@
         </div>
 
         <div id="give-form" class="give-form-box" data-reveal data-reveal-delay="1">
+
+          <!-- Slim well: bubbles only, above heading -->
+          <div class="well-mini">
+            <svg viewBox="0 0 90 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="wm-l" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%"   stop-color="#7a6a52"/>
+                  <stop offset="35%"  stop-color="#bca680"/>
+                  <stop offset="100%" stop-color="#967a5a"/>
+                </linearGradient>
+                <linearGradient id="wm-r" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%"   stop-color="#967a5a"/>
+                  <stop offset="65%"  stop-color="#bca680"/>
+                  <stop offset="100%" stop-color="#7a6a52"/>
+                </linearGradient>
+                <linearGradient id="wm-top" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%"   stop-color="#d0bc98"/>
+                  <stop offset="100%" stop-color="#9e8866"/>
+                </linearGradient>
+                <linearGradient id="wm-int" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%"   stop-color="#162030"/>
+                  <stop offset="100%" stop-color="#06101a"/>
+                </linearGradient>
+                <linearGradient id="wm-sl" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%"   stop-color="rgba(0,0,0,0.40)"/>
+                  <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                </linearGradient>
+                <linearGradient id="wm-sr" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%"   stop-color="rgba(0,0,0,0)"/>
+                  <stop offset="100%" stop-color="rgba(0,0,0,0.40)"/>
+                </linearGradient>
+                <linearGradient id="wm-cs" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%"   stop-color="rgba(0,0,0,0.26)"/>
+                  <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                </linearGradient>
+                <!-- Interior: x=24..66, y=28..148 -->
+                <clipPath id="wm-clip">
+                  <rect x="24" y="28" width="42" height="120"/>
+                </clipPath>
+                <!-- Water fill gradient (bright surface → deep blue) -->
+                <linearGradient id="wm-wg" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%"   stop-color="#60e4ff"/>
+                  <stop offset="22%"  stop-color="#00adef"/>
+                  <stop offset="70%"  stop-color="#0068b8"/>
+                  <stop offset="100%" stop-color="#003c7a"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Interior dark background -->
+              <rect x="24" y="28" width="42" height="120" fill="url(#wm-int)"/>
+
+              <!-- Water column — JS animates this group upward as level rises.
+                   Wave path fills from crest (~y=3) down to y=130 (local coords).
+                   Interior clip (wm-clip) cuts everything outside y=28..148 in SVG space. -->
+              <g id="wm-wave-g" clip-path="url(#wm-clip)" transform="translate(24, 148)">
+                <g class="wm-wave-move">
+                  <path fill="url(#wm-wg)" d="M-42 3 Q-31.5 -3 -21 3 Q-10.5 9 0 3 Q10.5 -3 21 3 Q31.5 9 42 3 Q52.5 -3 63 3 Q73.5 9 84 3 L84 130 L-42 130 Z"/>
+                  <path fill="rgba(185,248,255,0.22)" d="M-42 1 Q-31.5 8 -21 1 Q-10.5 -6 0 1 Q10.5 8 21 1 Q31.5 -6 42 1 Q52.5 8 63 1 Q73.5 -6 84 1 L84 9 L-42 9 Z"/>
+                </g>
+              </g>
+
+              <!-- Depth side shadows (drawn over water for interior depth illusion) -->
+              <rect x="24" y="28" width="14" height="120" fill="url(#wm-sl)" clip-path="url(#wm-clip)"/>
+              <rect x="52" y="28" width="14" height="120" fill="url(#wm-sr)" clip-path="url(#wm-clip)"/>
+
+              <!-- Bubbles — white so they read correctly in both dark and filled water -->
+              <g clip-path="url(#wm-clip)">
+                <circle class="bbl b1" cx="33" cy="128" r="1.8" fill="rgba(255,255,255,0.60)"/>
+                <circle class="bbl b2" cx="55" cy="118" r="1.3" fill="rgba(255,255,255,0.55)"/>
+                <circle class="bbl b3" cx="44" cy="136" r="1.6" fill="rgba(255,255,255,0.52)"/>
+                <circle class="bbl b4" cx="62" cy="130" r="1.1" fill="rgba(255,255,255,0.65)"/>
+                <circle class="bbl b5" cx="38" cy="122" r="1.4" fill="rgba(255,255,255,0.50)"/>
+              </g>
+
+              <!-- Stone left wall -->
+              <rect x="4" y="26" width="20" height="124" fill="url(#wm-l)"/>
+              <line x1="4" y1="54"  x2="24" y2="54"  stroke="rgba(0,0,0,0.13)" stroke-width="0.7"/>
+              <line x1="4" y1="82"  x2="24" y2="82"  stroke="rgba(0,0,0,0.13)" stroke-width="0.7"/>
+              <line x1="4" y1="110" x2="24" y2="110" stroke="rgba(0,0,0,0.13)" stroke-width="0.7"/>
+              <line x1="14" y1="26"  x2="14" y2="54"  stroke="rgba(0,0,0,0.07)" stroke-width="0.4"/>
+              <line x1="14" y1="82"  x2="14" y2="110" stroke="rgba(0,0,0,0.07)" stroke-width="0.4"/>
+              <rect x="18" y="26" width="6" height="124" fill="rgba(0,0,0,0.16)"/>
+
+              <!-- Stone right wall -->
+              <rect x="66" y="26" width="20" height="124" fill="url(#wm-r)"/>
+              <line x1="66" y1="54"  x2="86" y2="54"  stroke="rgba(0,0,0,0.13)" stroke-width="0.7"/>
+              <line x1="66" y1="82"  x2="86" y2="82"  stroke="rgba(0,0,0,0.13)" stroke-width="0.7"/>
+              <line x1="66" y1="110" x2="86" y2="110" stroke="rgba(0,0,0,0.13)" stroke-width="0.7"/>
+              <line x1="76" y1="26"  x2="76" y2="54"  stroke="rgba(0,0,0,0.07)" stroke-width="0.4"/>
+              <line x1="76" y1="82"  x2="76" y2="110" stroke="rgba(0,0,0,0.07)" stroke-width="0.4"/>
+              <rect x="66" y="26" width="6" height="124" fill="rgba(0,0,0,0.16)"/>
+
+              <!-- Stone top cap -->
+              <rect x="0" y="8" width="90" height="22" rx="2" fill="url(#wm-top)"/>
+              <rect x="0" y="8" width="90" height="4"  rx="2" fill="rgba(255,255,255,0.13)"/>
+              <rect x="0" y="26" width="90" height="10" fill="url(#wm-cs)"/>
+              <line x1="30" y1="8" x2="30" y2="30" stroke="rgba(0,0,0,0.08)" stroke-width="0.4"/>
+              <line x1="60" y1="8" x2="60" y2="30" stroke="rgba(0,0,0,0.08)" stroke-width="0.4"/>
+
+              <!-- Stone base -->
+              <rect x="0" y="146" width="90" height="14" rx="2" fill="#9e8866"/>
+              <rect x="0" y="146" width="90" height="3"  rx="2" fill="rgba(255,255,255,0.07)"/>
+            </svg>
+            <div id="wi-text">Provides pastoral care resources for one family</div>
+          </div>
+
           <h3 style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--dark);margin-bottom:24px;">Give online</h3>
 
           <div class="give-freq">
@@ -307,7 +638,7 @@
 
   <script src="nav.js"></script>
   <script>
-    // Amount button selection
+    // ─── Amount button selection ─────────────────────────────────────────────
     document.querySelectorAll('.give-amount-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.give-amount-btn').forEach(b => b.classList.remove('selected'));
@@ -319,16 +650,103 @@
           input.value = '';
           input.focus();
         }
+        setTimeout(onAmountChange, 30);
       });
     });
 
-    // Frequency button selection
+    // ─── Frequency button selection ──────────────────────────────────────────
     document.querySelectorAll('.give-freq-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.give-freq-btn').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
       });
     });
+
+    // ─── Well impact label ───────────────────────────────────────────────────
+    const WELL_TIERS = [
+      { max: 24,       text: 'Select an amount to see your impact' },
+      { max: 49,       text: 'Covers one week of children\'s ministry supplies' },
+      { max: 99,       text: 'Provides pastoral care resources for one family' },
+      { max: 249,      text: 'Funds a full Wells small group gathering' },
+      { max: 499,      text: 'Supports a full Sunday of worship and hospitality' },
+      { max: 999,      text: 'Powers a month of community outreach programs' },
+      { max: 2499,     text: 'Sustains CityWell\'s full ministry for one month' },
+      { max: Infinity, text: 'Transforms our community for an entire season' },
+    ];
+
+    function updateWellLabel(amount) {
+      const tier = WELL_TIERS.find(t => amount <= t.max) || WELL_TIERS[WELL_TIERS.length - 1];
+      const el = document.getElementById('wi-text');
+      if (!el) return;
+      el.style.opacity = '0';
+      setTimeout(() => { el.textContent = tier.text; el.style.opacity = '1'; }, 220);
+    }
+
+    // ─── Well water level animation ──────────────────────────────────────────
+    // Interior SVG coords: y=28 (top) → y=148 (bottom), height=120
+    const WELL_INT_BOTTOM = 148;
+    const WELL_INT_H      = 120;
+
+    const WATER_TIERS = [
+      { max: 0,        pct: 0  },
+      { max: 24,       pct: 5  },
+      { max: 49,       pct: 16 },
+      { max: 99,       pct: 32 },
+      { max: 249,      pct: 48 },
+      { max: 499,      pct: 63 },
+      { max: 999,      pct: 75 },
+      { max: 2499,     pct: 86 },
+      { max: Infinity, pct: 93 },
+    ];
+
+    function amountToWaterPct(amount) {
+      if (!amount || amount <= 0) return 0;
+      const tier = WATER_TIERS.find(t => amount <= t.max);
+      return tier ? tier.pct : 93;
+    }
+
+    let wellCurrentPct = 0;
+    let wellTargetPct  = 0;
+    let wellRafId      = null;
+
+    function applyWaterLevel(pct) {
+      const waterTop = WELL_INT_BOTTOM - (WELL_INT_H * pct / 100);
+      const waveG = document.getElementById('wm-wave-g');
+      if (waveG) waveG.setAttribute('transform', `translate(24, ${waterTop})`);
+    }
+
+    function wellTick() {
+      const diff = wellTargetPct - wellCurrentPct;
+      if (Math.abs(diff) < 0.05) {
+        wellCurrentPct = wellTargetPct;
+        applyWaterLevel(wellCurrentPct);
+        wellRafId = null;
+        return;
+      }
+      wellCurrentPct += diff * 0.09; // ease-out lerp — water settles organically
+      applyWaterLevel(wellCurrentPct);
+      wellRafId = requestAnimationFrame(wellTick);
+    }
+
+    function setWellWater(pct) {
+      wellTargetPct = pct;
+      if (!wellRafId) wellRafId = requestAnimationFrame(wellTick);
+    }
+
+    // ─── Unified amount-change handler ───────────────────────────────────────
+    function onAmountChange() {
+      const v = parseFloat(document.querySelector('.give-custom-input input').value) || 0;
+      if (v > 0) {
+        updateWellLabel(v);
+        setWellWater(amountToWaterPct(v));
+      }
+    }
+
+    const giveInput = document.querySelector('.give-custom-input input');
+    if (giveInput) giveInput.addEventListener('input', onAmountChange);
+
+    // Animate to default selected amount ($50) on load
+    setTimeout(() => setWellWater(amountToWaterPct(50)), 300);
   </script>
 </body>
 </html>
