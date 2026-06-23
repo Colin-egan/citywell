@@ -956,19 +956,6 @@
       <p>Stay connected with our community on Facebook</p>
       <div class="fb-page-wrap">
         <div id="fb-root"></div>
-        <script>
-          (function() {
-            var w = window.innerWidth;
-            if (w <= 768) {
-              var containerW = w <= 480 ? 300 : 340;
-              var h = Math.round(containerW * (600 / 500));
-              document.addEventListener('DOMContentLoaded', function() {
-                var el = document.querySelector('.fb-page');
-                if (el) el.setAttribute('data-height', h);
-              });
-            }
-          })();
-        </script>
         <script async defer crossorigin="anonymous"
           src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
         </script>
