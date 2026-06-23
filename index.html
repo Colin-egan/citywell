@@ -676,6 +676,10 @@
     .fb-page-wrap {
       display: flex;
       justify-content: center;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      overflow-x: hidden;
     }
 
 
@@ -751,13 +755,13 @@
       .service-badge { display: none; }
       .covenant-pillars { grid-template-columns: 1fr; gap: 32px; }
       #facebook-feed { padding: 64px 20px; }
-      .fb-page-wrap { overflow: hidden; width: 100%; max-width: 340px; margin: 0 auto; }
+      .fb-page-wrap { max-width: calc(100vw - 40px); }
     }
 
     @media (max-width: 480px) {
       .form-name { grid-template-columns: 1fr; }
       #facebook-feed { padding: 48px 16px; }
-      .fb-page-wrap { max-width: 300px; }
+      .fb-page-wrap { max-width: calc(100vw - 32px); }
     }
   </style>
 </head>
@@ -962,7 +966,6 @@
         <div class="fb-page"
           data-href="https://www.facebook.com/citywell2317/"
           data-tabs="timeline"
-          data-width="500"
           data-height="600"
           data-small-header="true"
           data-adapt-container-width="true"
