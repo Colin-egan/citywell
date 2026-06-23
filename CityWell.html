@@ -45,29 +45,6 @@
     img { display: block; max-width: 100%; }
 
 
-    /* ─── ANNOUNCEMENT BAR ──────────────────────── */
-    #announce-bar {
-      background: var(--accent);
-      color: white;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.09em;
-      text-align: center;
-      padding: 10px 20px;
-      text-transform: uppercase;
-    }
-
-    #announce-bar a {
-      color: white;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      opacity: 0.92;
-      transition: opacity 0.2s;
-    }
-
-    #announce-bar a:hover { opacity: 1; }
-
-
     /* ─── HEADER / NAV ───────────────────────────── */
     #main-header {
       position: fixed;
@@ -1535,11 +1512,6 @@
 </head>
 <body>
 
-  <!-- ANNOUNCEMENT BAR -->
-  <div id="announce-bar">
-    Join us Sundays at 10:30am &nbsp;·&nbsp; <a href="new-to-citywell.html">New to CityWell?</a>
-  </div>
-
   <!-- HEADER -->
   <header id="main-header">
     <div class="header-inner">
@@ -1945,17 +1917,11 @@
   <script>
     // ── Sticky nav ──────────────────────────────────
     const header = document.getElementById('main-header');
-    const announceBar = document.getElementById('announce-bar');
-    const announceH = announceBar ? announceBar.offsetHeight : 0;
-
     function updateHeader() {
-      header.classList.toggle('scrolled', window.scrollY > announceH + 20);
+      header.classList.toggle('scrolled', window.scrollY > 20);
     }
     window.addEventListener('scroll', updateHeader, { passive: true });
     updateHeader();
-
-    const hero = document.getElementById('hero');
-    if (hero) hero.style.paddingTop = announceH + 'px';
 
     // ── Mobile menu ──────────────────────────────────
     const mobileToggle = document.querySelector('.mobile-toggle');
