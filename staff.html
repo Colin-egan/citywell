@@ -183,5 +183,22 @@
     </div>
   </footer>
   <script src="nav.js"></script>
+  <script>
+    document.querySelectorAll('.staff-bio').forEach(function(bio) {
+      if (bio.scrollHeight > bio.clientHeight + 2) {
+        var btn = document.createElement('button');
+        btn.className = 'bio-toggle';
+        btn.innerHTML = 'Read more <span class="bio-arrow">&#8964;</span>';
+        btn.addEventListener('click', function() {
+          var expanded = bio.classList.toggle('is-expanded');
+          btn.classList.toggle('is-open', expanded);
+          btn.innerHTML = expanded
+            ? 'Read less <span class="bio-arrow">&#8964;</span>'
+            : 'Read more <span class="bio-arrow">&#8964;</span>';
+        });
+        bio.parentNode.insertBefore(btn, bio.nextSibling);
+      }
+    });
+  </script>
 </body>
 </html>
