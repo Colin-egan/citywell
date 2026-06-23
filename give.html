@@ -463,71 +463,76 @@
 
           <!-- Slim well: bubbles only, above heading -->
           <div class="well-mini">
-            <svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <svg viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <defs>
-                <!-- Drop silhouette used for clipping all fill content -->
+                <!--
+                  Drop path: tip at (30,4), bezier sides with last control points
+                  at (6,46) and (54,46) so the tangent is exactly vertical where
+                  the curve meets the arc — no kink at the widest point.
+                  Arc center (30,68) radius 24 → bottom at (30,92).
+                -->
                 <clipPath id="drop-clip">
-                  <path d="M40 6 C26 20,10 42,8 60 A32 32 0 0 1 72 60 C70 42,54 20,40 6Z"/>
+                  <path d="M30 4 C16 22,6 46,6 68 A24 24 0 0 1 54 68 C54 46,44 22,30 4Z"/>
                 </clipPath>
                 <!-- Water level clip — JS updates y and height to reveal from bottom up -->
                 <clipPath id="drop-wl-clip">
-                  <rect id="drop-wcr" x="0" y="92" width="80" height="0"/>
+                  <rect id="drop-wcr" x="0" y="92" width="60" height="0"/>
                 </clipPath>
-                <!-- Water gradient (top of interior y=8 → bottom y=92) -->
-                <linearGradient id="drop-wg" x1="0" y1="8" x2="0" y2="92" gradientUnits="userSpaceOnUse">
+                <!-- Water gradient: interior top y=6 → bottom y=92 -->
+                <linearGradient id="drop-wg" x1="0" y1="6" x2="0" y2="92" gradientUnits="userSpaceOnUse">
                   <stop offset="0%"   stop-color="#7ef0ff"/>
                   <stop offset="22%"  stop-color="#00adef"/>
                   <stop offset="72%"  stop-color="#0068b8"/>
                   <stop offset="100%" stop-color="#004286"/>
                 </linearGradient>
-                <!-- Horizontal shimmer across water surface -->
+                <!-- Horizontal shimmer band -->
                 <linearGradient id="drop-sh" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%"   stop-color="rgba(255,255,255,0)"/>
                   <stop offset="40%"  stop-color="rgba(255,255,255,0.22)"/>
                   <stop offset="60%"  stop-color="rgba(255,255,255,0.08)"/>
                   <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
                 </linearGradient>
-                <!-- Frosted-glass fill for the empty area -->
-                <radialGradient id="drop-empty" cx="38%" cy="32%" r="58%">
-                  <stop offset="0%"   stop-color="rgba(0,173,239,0.09)"/>
+                <!-- Frosted-glass fill for empty area -->
+                <radialGradient id="drop-empty" cx="38%" cy="28%" r="60%">
+                  <stop offset="0%"   stop-color="rgba(0,173,239,0.10)"/>
                   <stop offset="100%" stop-color="rgba(0,173,239,0.02)"/>
                 </radialGradient>
               </defs>
 
-              <!-- Empty drop background (frosted glass look) -->
-              <path d="M40 6 C26 20,10 42,8 60 A32 32 0 0 1 72 60 C70 42,54 20,40 6Z"
+              <!-- Empty drop background (frosted glass) -->
+              <path d="M30 4 C16 22,6 46,6 68 A24 24 0 0 1 54 68 C54 46,44 22,30 4Z"
                     fill="url(#drop-empty)"/>
 
               <!-- Water fill — clipped to drop shape AND water level -->
               <g clip-path="url(#drop-clip)">
                 <g clip-path="url(#drop-wl-clip)">
-                  <rect x="0" y="6" width="80" height="86" fill="url(#drop-wg)"/>
-                  <rect x="0" y="6" width="80" height="86" fill="url(#drop-sh)" opacity="0.75"/>
-                  <!-- Rising bubbles (only visible inside water fill, thanks to wl-clip) -->
-                  <circle class="bbl b1" cx="29" cy="82" r="1.6" fill="rgba(255,255,255,0.55)"/>
-                  <circle class="bbl b2" cx="53" cy="76" r="1.2" fill="rgba(255,255,255,0.50)"/>
-                  <circle class="bbl b3" cx="40" cy="86" r="1.4" fill="rgba(255,255,255,0.48)"/>
-                  <circle class="bbl b4" cx="63" cy="80" r="1.0" fill="rgba(255,255,255,0.58)"/>
-                  <circle class="bbl b5" cx="21" cy="74" r="1.3" fill="rgba(255,255,255,0.45)"/>
+                  <rect x="0" y="4" width="60" height="88" fill="url(#drop-wg)"/>
+                  <rect x="0" y="4" width="60" height="88" fill="url(#drop-sh)" opacity="0.75"/>
+                  <!-- Rising bubbles (clipped inside water fill) -->
+                  <circle class="bbl b1" cx="20" cy="84" r="1.4" fill="rgba(255,255,255,0.55)"/>
+                  <circle class="bbl b2" cx="40" cy="78" r="1.1" fill="rgba(255,255,255,0.50)"/>
+                  <circle class="bbl b3" cx="30" cy="88" r="1.3" fill="rgba(255,255,255,0.48)"/>
+                  <circle class="bbl b4" cx="46" cy="82" r="0.9" fill="rgba(255,255,255,0.58)"/>
+                  <circle class="bbl b5" cx="15" cy="76" r="1.2" fill="rgba(255,255,255,0.45)"/>
                 </g>
               </g>
 
               <!-- Animated wave at water surface (JS positions this group) -->
               <g id="drop-wave-g" clip-path="url(#drop-clip)" transform="translate(0,92)">
                 <g class="wm-wave-move">
-                  <path fill="url(#drop-wg)" d="M-21 2 Q-15.75 -0.5 -10.5 2 Q-5.25 4.5 0 2 Q5.25 -0.5 10.5 2 Q15.75 4.5 21 2 Q26.25 -0.5 31.5 2 Q36.75 4.5 42 2 Q47.25 -0.5 52.5 2 Q57.75 4.5 63 2 Q68.25 -0.5 73.5 2 Q78.75 4.5 94.5 2 L94.5 100 L-21 100 Z"/>
-                  <path fill="rgba(185,248,255,0.22)" d="M-21 0 Q-15.75 3 -10.5 0 Q-5.25 -3 0 0 Q5.25 3 10.5 0 Q15.75 -3 21 0 Q26.25 3 31.5 0 Q36.75 -3 42 0 Q47.25 3 52.5 0 Q57.75 -3 63 0 Q68.25 3 73.5 0 Q78.75 -3 94.5 0 L94.5 8 L-21 8 Z"/>
+                  <path fill="url(#drop-wg)" d="M-21 2 Q-15.75 -0.5 -10.5 2 Q-5.25 4.5 0 2 Q5.25 -0.5 10.5 2 Q15.75 4.5 21 2 Q26.25 -0.5 31.5 2 Q36.75 4.5 42 2 Q47.25 -0.5 52.5 2 Q57.75 4.5 75 2 L75 100 L-21 100 Z"/>
+                  <path fill="rgba(185,248,255,0.22)" d="M-21 0 Q-15.75 3 -10.5 0 Q-5.25 -3 0 0 Q5.25 3 10.5 0 Q15.75 -3 21 0 Q26.25 3 31.5 0 Q36.75 -3 42 0 Q47.25 3 52.5 0 Q57.75 -3 75 0 L75 8 L-21 8 Z"/>
                 </g>
               </g>
 
-              <!-- Glass reflection streak (upper-left of drop) -->
+              <!-- Glass reflection (upper-left, clipped to drop) -->
               <g clip-path="url(#drop-clip)">
-                <path d="M27 15 Q19 28, 17 45" stroke="rgba(255,255,255,0.48)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                <ellipse cx="32" cy="21" rx="4.5" ry="7.5" fill="rgba(255,255,255,0.16)" transform="rotate(-22,32,21)"/>
+                <path d="M20 13 Q13 24,12 38" stroke="rgba(255,255,255,0.48)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                <ellipse cx="24" cy="18" rx="3.5" ry="6" fill="rgba(255,255,255,0.18)" transform="rotate(-20,24,18)"/>
               </g>
 
-              <!-- Drop outline (drawn last, sits on top of all fill) -->
-              <path d="M40 6 C26 20,10 42,8 60 A32 32 0 0 1 72 60 C70 42,54 20,40 6Z"
+              <!-- Drop outline (on top of all fill) -->
+              <path d="M30 4 C16 22,6 46,6 68 A24 24 0 0 1 54 68 C54 46,44 22,30 4Z"
                     fill="none" stroke="rgba(0,173,239,0.38)" stroke-width="1.5"/>
             </svg>
             <div id="wi-text">Provides pastoral care resources for one family</div>
@@ -650,9 +655,9 @@
     }
 
     // ─── Water drop level animation ──────────────────────────────────────────
-    // Drop interior SVG coords: y=8 (top near tip) → y=92 (bottom of arc), height=84
+    // Drop interior SVG coords: y=6 (top near tip) → y=92 (bottom of arc), height=86
     const WELL_INT_BOTTOM = 92;
-    const WELL_INT_H      = 84;
+    const WELL_INT_H      = 86;
 
     const WATER_TIERS = [
       { max: 0,        pct: 0  },
