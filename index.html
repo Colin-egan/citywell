@@ -751,12 +751,13 @@
       .service-badge { display: none; }
       .covenant-pillars { grid-template-columns: 1fr; gap: 32px; }
       #facebook-feed { padding: 64px 20px; }
-      .fb-page-wrap { overflow: hidden; width: 100%; }
+      .fb-page-wrap { overflow: hidden; width: 100%; max-width: 340px; margin: 0 auto; }
     }
 
     @media (max-width: 480px) {
       .form-name { grid-template-columns: 1fr; }
       #facebook-feed { padding: 48px 16px; }
+      .fb-page-wrap { max-width: 300px; }
     }
   </style>
 </head>
